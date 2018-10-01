@@ -13,7 +13,7 @@ public class ManageDao {
 	private PreparedStatement psmt;
 	private ResultSet rs; //excuteQuery()
 	private String sql;  //Sql 
-	private int r;  //excuteUpdate()
+	private int r;  //excuteUpdate().
 	public ManageDao() {  //
 		try {
 			String user = "kim";
