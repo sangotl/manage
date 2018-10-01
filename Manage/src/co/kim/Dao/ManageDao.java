@@ -26,16 +26,44 @@ public class ManageDao {
 			e.printStackTrace();
 		}
 	}
-	public ResultSet itemView() { //
+//	public ResultSet itemView() { //
+//		sql = "select * from item_i";
+//		try {
+//			psmt = conn.prepareStatement(sql);
+//			rs = psmt.executeQuery();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return rs;
+//	}
+	
+	public ResultSet itemView() throws SQLException { //¿¬½À¿ë
 		sql = "select * from item_i";
+		ItemInfoBean sb = new ItemInfoBean();
 		try {
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}		
+		if(rs.next()) {
+			do {			
+				sb = new ItemInfoBean();
+				sb.setG_code(rs.getString("g_code"));
+				sb.setI_code(rs.getString("i_code"));
+				sb.setI_name(rs.getString("i_name"));
+				sb.setStand(rs.getString("stand"));
+				sb.setUnit(rs.getString("unit"));							
+				sb.toPrint();
+			} while(rs.next());
+		} else System.out.println("else");
+		
 		return rs;
+		
+		
 	}
+	
+	
 	
 	public int InsertManage(ItemInfoBean b) throws SQLException {  //
 		sql = "insert into item_i values(?,?,?,?,?)";
@@ -77,7 +105,23 @@ public class ManageDao {
 		}		
 		return rs;
 	}
-	
+	public int EditManage(ItemInfoBean eb) { 	//
+		sql = "update item_i set g_code = ?, i_code = ?, i_name = ?, stand = ?, unit = ? where i_code = ?";
+			
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1,eb.getG_code());
+			psmt.setString(2,eb.getI_code());
+			psmt.setString(3,eb.getI_name());
+			psmt.setString(4,eb.getStand());
+			psmt.setString(5,eb.getUnit());
+			psmt.setString(6, eb.getI_code());
+			r = psmt.executeUpdate();
+		} catch (SQLException e ) {
+			e.printStackTrace();
+		}
+		return r;
+	}
 	
 	
 	public void close() throws SQLException {  //DB

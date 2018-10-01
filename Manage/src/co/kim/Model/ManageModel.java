@@ -1,35 +1,48 @@
 package co.kim.Model;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 import co.kim.Dao.ManageDao;
-import co.kim.bean.ItemInfoBean;
-
-
-
 
 public class ManageModel {
-	private ResultSet rs;  //excuteQuery()
-	private int res;   //excuteUpdate()
-	private int id; //
-	ManageDao dao = new ManageDao();
-	ItemInfoBean sb = new ItemInfoBean();
-	public void noticeView() throws SQLException {	//품목정보화면뷰		
-		
-		rs = dao.itemView();
-		if(rs.next()) {
-			do {			
-				sb = new ItemInfoBean();
-				sb.setG_code(rs.getString("g_code"));
-				sb.setI_code(rs.getString("i_code"));
-				sb.setI_name(rs.getString("i_name"));
-				sb.setStand(rs.getString("stand"));
-				sb.setUnit(rs.getString("unit"));							
-				sb.toPrint();
-			} while(rs.next());
-		} else System.out.println("else");
-		rs.close();
-	}
 	
+	public ManageModel() throws SQLException, Exception{
+		int num=1;
+		Scanner s = new Scanner(System.in);
+		
+		while(num>0) {		
+			System.out.println();
+			System.out.println("번호를 입력하세요(1. 전체보기, 2. 입력, 3. 삭제, 4. 수정 0. 종료");
+			
+			num = s.nextInt();			
+			switch(num){
+			case 1:
+	//			ManageModel mm = new ManageModel();
+	//			mm.noticeView();		//품목정보화면 뷰
+				ManageDao dao = new ManageDao();
+				dao.itemView();
+				break;
+			case 2:
+				ManageInsert mi = new ManageInsert();	//입력
+				mi.input();
+				break;
+			case 3:
+				ManageDelete md = new ManageDelete();	//삭제
+				md.delete();
+				break;
+			case 4:
+				ManageUpdate mu = new ManageUpdate();	//수정
+				mu.update();
+				break;
+			case 5:
+				
+				break;
+			case 0:
+				System.exit(0);
+				break;
+				
+			}
+		}
+	}
 }

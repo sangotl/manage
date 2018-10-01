@@ -15,11 +15,11 @@ public class ManageUpdate {
 	ResultSet rs;
 	public void update() throws ClassNotFoundException, SQLException  { 
 		ManageDao ndb = new ManageDao();
-		ManageModel mm = new ManageModel();
-		mm.noticeView(); 
+		
+		ndb.itemView(); 
 		System.out.println(" ==================== ");
 		System.out.println("변경할 상품코드를 입력하세요.");
-		rs = ndb.SearchManage(String.);
+		rs = ndb.SearchManage(sc.nextLine());
 		
 		try {
 			while(rs.next()) {
@@ -35,23 +35,36 @@ public class ManageUpdate {
 		}
 		
 		System.out.println(" ==================== ");
-		System.out.println("asdf");
+		System.out.println("번호를 선택하세요(1. 분류코드, 2. 상품코드, 3. 상품명, 4. 규격, 5. 단위)");
 		int n = Integer.parseInt(sc.nextLine());
 		EditSelectCol(n);
-		ndb.EditNotice(udate);  //
+		ndb.EditManage(udate);  
+		ndb.itemView();
 		ndb.close();
 	}
 	
 	private void EditSelectCol(int n) {
 		switch(n) {
 		case 1 : //
-			System.out.println("asdf");
-			udate.setTitle(sc.nextLine());
+			System.out.println("g_code");
+			udate.setG_code(sc.nextLine());
 			break;
-		case 2 : //
-			System.out.println("asdf");
-			udate.setContent(sc.nextLine());
-			break ;
+		case 2 : 
+			System.out.println("i_code");
+			udate.setI_code(sc.nextLine());
+			break;
+		case 3 : 
+			System.out.println("i_name");
+			udate.setI_name(sc.nextLine());
+			break;
+		case 4 : 
+			System.out.println("stand");
+			udate.setStand(sc.nextLine());
+			break;
+		case 5 : 
+			System.out.println("unit");
+			udate.setUnit(sc.nextLine());
+			break;
 		}
 	}
 }

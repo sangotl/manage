@@ -14,7 +14,7 @@ public class ManageInsert {
 
 	public void input() throws ClassNotFoundException, SQLException {                    //Bean 
 		ManageDao mdbo = new ManageDao();
-		ManageModel mm = new ManageModel();
+		
 		System.out.println("분류코드 입력하세요.");    
 		ib.setG_code(sc.nextLine());                    
 		System.out.println("상품코드 입력하세요");
@@ -25,10 +25,10 @@ public class ManageInsert {
 		ib.setStand(sc.nextLine());
 		System.out.println("단위를 입력하세요");
 		ib.setUnit(sc.nextLine());
-		sc.close();
+		
 		
 		mdbo.InsertManage(ib);   //Bean 
-		mm.noticeView();
+		mdbo.itemView();
 		mdbo.close();
 	}
 }

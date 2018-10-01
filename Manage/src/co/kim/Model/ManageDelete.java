@@ -11,15 +11,14 @@ public class ManageDelete {
 	public void delete() throws ClassNotFoundException, SQLException {
 		Scanner sc = new Scanner(System.in);
 		ManageDao dao = new ManageDao();
-		ManageModel mm = new ManageModel();
 		
-		mm.noticeView();
+		
+		dao.itemView();
 		System.out.println(" =============== ");
 		System.out.println("삭제할 상품코드를 입력하세요");
-		String n = sc.nextLine();
-		sc.close();		
+		String n = sc.nextLine();				
 		dao.DeleteManage(n);		
-		mm.noticeView();
+		dao.itemView();
 		dao.close();
 	}
 }
