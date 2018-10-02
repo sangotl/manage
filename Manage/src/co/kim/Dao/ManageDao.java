@@ -105,6 +105,8 @@ public class ManageDao {
 		}		
 		return rs;
 	}
+	
+	
 	public int EditManage(ItemInfoBean eb) { 	//
 		sql = "update item_i set g_code = ?, i_code = ?, i_name = ?, stand = ?, unit = ? where i_code = ?";
 			
@@ -115,7 +117,7 @@ public class ManageDao {
 			psmt.setString(3,eb.getI_name());
 			psmt.setString(4,eb.getStand());
 			psmt.setString(5,eb.getUnit());
-			psmt.setString(6, eb.getI_code());
+			psmt.setString(6,eb.getI_code());
 			r = psmt.executeUpdate();
 		} catch (SQLException e ) {
 			e.printStackTrace();

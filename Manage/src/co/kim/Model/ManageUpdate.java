@@ -35,7 +35,7 @@ public class ManageUpdate {
 		}
 		
 		System.out.println(" ==================== ");
-		System.out.println("번호를 선택하세요(1. 분류코드, 2. 상품코드, 3. 상품명, 4. 규격, 5. 단위)");
+		System.out.println("번호를 선택하세요(1. 분류코드, 2. 상품명, 3. 규격, 4. 단위)");
 		int n = Integer.parseInt(sc.nextLine());
 		EditSelectCol(n);
 		ndb.EditManage(udate);  
@@ -50,18 +50,14 @@ public class ManageUpdate {
 			udate.setG_code(sc.nextLine());
 			break;
 		case 2 : 
-			System.out.println("i_code");
-			udate.setI_code(sc.nextLine());
-			break;
-		case 3 : 
 			System.out.println("i_name");
 			udate.setI_name(sc.nextLine());
 			break;
-		case 4 : 
+		case 3 : 
 			System.out.println("stand");
 			udate.setStand(sc.nextLine());
 			break;
-		case 5 : 
+		case 4 : 
 			System.out.println("unit");
 			udate.setUnit(sc.nextLine());
 			break;
