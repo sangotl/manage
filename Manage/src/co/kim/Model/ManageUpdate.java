@@ -149,7 +149,7 @@ public class ManageUpdate {
 		switch(n) {
 		case 1 : //
 			System.out.println("업체명을 입력하세요.");
-			bdate.setB_code(sc.nextLine());
+			bdate.setB_name(sc.nextLine());
 			break;
 		case 2 : 
 			System.out.println("주소를 입력하세요.");
