@@ -6,9 +6,11 @@ import java.util.Scanner;
 
 import co.kim.Dao.BuyManageDao;
 import co.kim.Dao.ItemInfoDao;
+import co.kim.Dao.SellManageDao;
 import co.kim.Dao.WareInfoDao;
 import co.kim.bean.BuyManageBean;
 import co.kim.bean.ItemInfoBean;
+import co.kim.bean.SellManageBean;
 import co.kim.bean.WareInfoBean;
 
 
@@ -17,6 +19,7 @@ public class ManageUpdate {
 	ItemInfoBean idate = new ItemInfoBean();
 	WareInfoBean wdate = new WareInfoBean();
 	BuyManageBean bdate = new BuyManageBean();
+	SellManageBean sdate = new SellManageBean();
 	Scanner sc = new Scanner(System.in);
 	ResultSet rs;
 	public void ItemInfoUpdate() throws ClassNotFoundException, SQLException  { 
@@ -137,7 +140,7 @@ public class ManageUpdate {
 		}
 		
 		System.out.println(" ==================== ");
-		System.out.println("번호를 선택하세요(1. 업체명, 2. 주소, 3. 주소, 4. 연락처, 5. 대표자명)");
+		System.out.println("번호를 선택하세요(1. 업체명, 2. 업체명, 3. 주소, 4. 연락처, 5. 대표자명)");
 		int n = Integer.parseInt(sc.nextLine());
 		BuyManageEditSelect(n);
 		bdb.BuyManageSearchEdit(bdate);  
@@ -162,6 +165,60 @@ public class ManageUpdate {
 		case 4 : 
 			System.out.println("대표자명을 입력하세요.");
 			bdate.setR_name(sc.nextLine());
+			break;
+		}
+	}
+	
+	
+	
+	
+	public void SellManageUpdate() throws ClassNotFoundException, SQLException  { 
+		SellManageDao sdb = new SellManageDao();
+		System.out.println("업체코드"+"\t"+ "업체명"+"\t"+ "주소"+"\t"+ "연락처"+"\t"+ "대표자명");
+		sdb.SellManageView(); 
+		System.out.println(" ==================== ");
+		System.out.println("변경할 업체코드를 입력하세요.");
+		rs = sdb.SellManageSearch(sc.nextLine());
+		System.out.println("업체코드"+"\t"+ "업체명"+"\t"+ "주소"+"\t"+ "연락처"+"\t"+ "대표자명");
+		try {
+			while(rs.next()) {
+				sdate.setB_code(rs.getString("b_code"));
+				sdate.setB_name(rs.getString("b_name"));
+				sdate.setAddress(rs.getString("address"));				
+				sdate.setP_number(rs.getString("p_number"));
+				sdate.setR_name(rs.getString("r_name"));
+				sdate.toPrint();
+			 }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(" ==================== ");
+		System.out.println("번호를 선택하세요(1. 업체명, 2. 업체명, 3. 주소, 4. 연락처, 5. 대표자명)");
+		int n = Integer.parseInt(sc.nextLine());
+		SellManageEditSelect(n);
+		sdb.SellManageSearchEdit(sdate);  
+		sdb.SellManageView();
+		sdb.close();
+	}
+	
+	private void SellManageEditSelect(int n) {
+		switch(n) {
+		case 1 : //
+			System.out.println("업체명을 입력하세요.");
+			sdate.setB_name(sc.nextLine());
+			break;
+		case 2 : 
+			System.out.println("주소를 입력하세요.");
+			sdate.setAddress(sc.nextLine());
+			break;
+		case 3 : 
+			System.out.println("연락처를 입력하세요.");
+			sdate.setP_number(sc.nextLine());
+			break;
+		case 4 : 
+			System.out.println("대표자명을 입력하세요.");
+			sdate.setR_name(sc.nextLine());
 			break;
 		}
 	}

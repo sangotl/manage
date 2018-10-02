@@ -5,9 +5,11 @@ import java.util.Scanner;
 
 import co.kim.Dao.BuyManageDao;
 import co.kim.Dao.ItemInfoDao;
+import co.kim.Dao.SellManageDao;
 import co.kim.Dao.WareInfoDao;
 import co.kim.bean.BuyManageBean;
 import co.kim.bean.ItemInfoBean;
+import co.kim.bean.SellManageBean;
 import co.kim.bean.WareInfoBean;
 
 
@@ -16,6 +18,7 @@ public class ManageInsert {
 	ItemInfoBean ib = new ItemInfoBean();
 	WareInfoBean wb = new WareInfoBean();
 	BuyManageBean bm = new BuyManageBean();
+	SellManageBean sm = new SellManageBean();
 	Scanner sc = new Scanner(System.in);
 
 	public void ItemInfoInsert() throws ClassNotFoundException, SQLException {  //  1. 품목정보테이블
@@ -52,8 +55,8 @@ public class ManageInsert {
 		wdbo.WareInfoView();
 		wdbo.close();
 	}
-	public void BuyManageInsert() throws ClassNotFoundException, SQLException {  //  3. 판매업체관리테이블
-		BuyManageDao mdbo = new BuyManageDao();
+	public void BuyManageInsert() throws ClassNotFoundException, SQLException {  //  3. 구매업체관리테이블
+		BuyManageDao bdbo = new BuyManageDao();
 		
 		System.out.println("업체코드를 입력하세요.");    
 		bm.setB_code(sc.nextLine());                    
@@ -67,8 +70,27 @@ public class ManageInsert {
 		bm.setR_name(sc.nextLine());
 		
 		
-		mdbo.BuyManageInsert(bm);   //Bean 
-		mdbo.BuyManageView();
-		mdbo.close();
+		bdbo.BuyManageInsert(bm);   //Bean 
+		bdbo.BuyManageView();
+		bdbo.close();
+	}
+	public void SellManageInsert() throws ClassNotFoundException, SQLException {  //  4. 판매업체관리테이블
+		SellManageDao sdbo = new SellManageDao();
+		
+		System.out.println("업체코드를 입력하세요.");    
+		sm.setB_code(sc.nextLine());                    
+		System.out.println("업체명을 입력하세요");
+		sm.setB_name(sc.nextLine());
+		System.out.println("주소를 입력하세요");
+		sm.setAddress(sc.nextLine());
+		System.out.println("연락처를 입력하세요");
+		sm.setP_number(sc.nextLine());
+		System.out.println("대표자명을 입력하세요");
+		sm.setR_name(sc.nextLine());
+		
+		
+		sdbo.SellManageInsert(sm);   //Bean 
+		sdbo.SellManageView();
+		sdbo.close();
 	}
 }
