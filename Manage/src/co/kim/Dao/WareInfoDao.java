@@ -7,14 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import co.kim.bean.ItemInfoBean;
+import co.kim.bean.WareInfoBean;
 
-public class ManageDao {
+public class WareInfoDao {
 	private Connection conn;
 	private PreparedStatement psmt;
 	private ResultSet rs; //excuteQuery()
 	private String sql;  //Sql 
 	private int r;  //excuteUpdate().
-	public ManageDao() {  //
+	public WareInfoDao() {  //
 		try {
 			String user = "kim";
 			String pw = "123";
@@ -26,20 +27,10 @@ public class ManageDao {
 			e.printStackTrace();
 		}
 	}
-//	public ResultSet itemView() { //
-//		sql = "select * from item_i";
-//		try {
-//			psmt = conn.prepareStatement(sql);
-//			rs = psmt.executeQuery();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return rs;
-//	}
-	
-	public ResultSet itemView() throws SQLException { //연습용
-		sql = "select * from item_i";
-		ItemInfoBean sb = new ItemInfoBean();
+
+	public ResultSet WareInfoView() throws SQLException { //연습용
+		sql = "select * from warehouse_i";
+		WareInfoBean wb = new WareInfoBean();
 		try {
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
@@ -48,32 +39,26 @@ public class ManageDao {
 		}		
 		if(rs.next()) {
 			do {			
-				sb = new ItemInfoBean();
-				sb.setG_code(rs.getString("g_code"));
-				sb.setI_code(rs.getString("i_code"));
-				sb.setI_name(rs.getString("i_name"));
-				sb.setStand(rs.getString("stand"));
-				sb.setUnit(rs.getString("unit"));							
-				sb.toPrint();
+				wb = new WareInfoBean();
+				wb.setW_code(rs.getString("w_code"));
+				wb.setW_name(rs.getString("w_name"));
+				wb.setW_content(rs.getString("w_content"));						
+				wb.toPrint();
 			} while(rs.next());
-		} else System.out.println("else");
+		} else System.out.println("창고 테이블에 데이터가 없습니다.");
 		
-		return rs;
-		
-		
+		return rs;		
 	}
 	
 	
 	
-	public int InsertManage(ItemInfoBean b) throws SQLException {  //
-		sql = "insert into item_i values(?,?,?,?,?)";
+	public int WareInfoInsert(WareInfoBean b) throws SQLException {  //
+		sql = "insert into warehouse_i values(?,?,?)";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, b.getG_code());
-			psmt.setString(2, b.getI_code());
-			psmt.setString(3, b.getI_name());
-			psmt.setString(4, b.getStand());
-			psmt.setString(5, b.getUnit());
+			psmt.setString(1, b.getW_code());
+			psmt.setString(2, b.getW_name());
+			psmt.setString(3, b.getW_content());
 			r = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -81,8 +66,8 @@ public class ManageDao {
 		return r;
 	}
 	
-	public int DeleteManage(String n) { //
-		sql = "delete from item_i where i_code = ?";  
+	public int WareInfoDelete(String n) { //
+		sql = "delete from warehouse_i where w_code = ?";  
 	
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -94,8 +79,8 @@ public class ManageDao {
 		return r;
 	}
 	
-	public ResultSet SearchManage(String id) { 	//
-		sql = "select * from item_i where i_code = ?";  	
+	public ResultSet WareInfoSearch(String id) { 	//
+		sql = "select * from warehouse_i where w_code = ?";  	
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1,id);
@@ -107,17 +92,15 @@ public class ManageDao {
 	}
 	
 	
-	public int EditManage(ItemInfoBean eb) { 	//
-		sql = "update item_i set g_code = ?, i_code = ?, i_name = ?, stand = ?, unit = ? where i_code = ?";
+	public int WareInfoSearchEdit(WareInfoBean wib) { 	//
+		sql = "update warehouse_i set w_code = ?, w_name = ?, w_content = ? where w_code = ?";
 			
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1,eb.getG_code());
-			psmt.setString(2,eb.getI_code());
-			psmt.setString(3,eb.getI_name());
-			psmt.setString(4,eb.getStand());
-			psmt.setString(5,eb.getUnit());
-			psmt.setString(6,eb.getI_code());
+			psmt.setString(1,wib.getW_code());
+			psmt.setString(2,wib.getW_name());
+			psmt.setString(3,wib.getW_content());
+			psmt.setString(4,wib.getW_code());
 			r = psmt.executeUpdate();
 		} catch (SQLException e ) {
 			e.printStackTrace();
@@ -129,6 +112,5 @@ public class ManageDao {
 	public void close() throws SQLException {  //DB
 		psmt.close();
 		conn.close();
-	}
-	
+	}	
 }

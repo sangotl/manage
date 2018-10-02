@@ -3,7 +3,7 @@ package co.kim.Model;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import co.kim.Dao.ManageDao;
+import co.kim.Dao.ItemInfoDao;
 
 
 public class ManageStart {

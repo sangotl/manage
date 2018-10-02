@@ -1,6 +1,6 @@
 package co.kim.bean;
 
-public class WareInofBean {		//2. 창고정보
+public class WareInfoBean {		//2. 창고정보
 	private String w_code;		//창고코드
 	private String w_name;		//창고명
 	private String w_content;	//설명
@@ -23,5 +23,7 @@ public class WareInofBean {		//2. 창고정보
 	public void setW_content(String w_content) {
 		this.w_content = w_content;
 	}	
-	
+	public void toPrint() {   		
+		System.out.println(w_code +"\t" + w_name +"\t" + w_content);		
+	}
 }
