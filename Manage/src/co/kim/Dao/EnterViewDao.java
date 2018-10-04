@@ -56,10 +56,10 @@ public class EnterViewDao {
 		return rs;		
 	}
 	public int EnterViewInsert(EnterViewBean b) throws SQLException {  //
-		sql = "insert into enter_v values(?,?,?,?,?)";
+		sql = "insert into enter_v values(?,?,?,?,?,?,?,?)";
 		try {
 			psmt = conn.prepareStatement(sql);
-		//	psmt.setString(1, b.getB_number());
+			psmt.setString(1, b.getB_number());
 			psmt.setString(2, b.getL_number());
 			psmt.setString(3, b.getI_code());
 			psmt.setString(4, b.getI_name());

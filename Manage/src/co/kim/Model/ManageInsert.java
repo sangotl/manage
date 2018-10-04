@@ -108,7 +108,7 @@ public class ManageInsert {
 		
 		
 		
-		edbo.EnterViewInsert(sm);   //Bean 
+		edbo.EnterViewInsert(ev);   //Bean 
 		edbo.EnterView();
 		edbo.close();
 	}
