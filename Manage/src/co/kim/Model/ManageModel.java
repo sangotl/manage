@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import co.kim.Dao.BuyManageDao;
+import co.kim.Dao.EnterViewDao;
 import co.kim.Dao.ItemInfoDao;
 import co.kim.Dao.SellManageDao;
 import co.kim.Dao.WareInfoDao;
@@ -15,7 +16,7 @@ public class ManageModel {
 		Scanner s = new Scanner(System.in);
 		while(n>0) {
 			System.out.println();
-			System.out.println("테이블을 선택하세요(1. 품목정보, 2. 창고정보, 3. 구매업체관리, 4. 판매업체관리, 0. 종료)");
+			System.out.println("테이블을 선택하세요(1. 품목정보, 2. 창고정보, 3. 구매업체관리, 4. 판매업체관리, 6. 입고화면 0. 종료)");
 			num = s.nextInt();
 			if(num==1) {			
 				while(num>0) {		
@@ -160,7 +161,42 @@ public class ManageModel {
 						}// switch end
 					}// while end
 			}
-			
+			else if(num==6) {
+				while(num>0) {		
+					System.out.println();
+					System.out.println("입고화면테이블 입니다.");
+					System.out.println("번호를 입력하세요(1. 전체보기, 2. 입력, 3. 삭제, 4. 수정 0. 뒤로)");
+					
+					num = s.nextInt();			
+					switch(num){
+						case 1:
+				//			ManageModel mm = new ManageModel();
+				//			mm.noticeView();		//품목정보화면 뷰
+							EnterViewDao dao = new EnterViewDao();
+							dao.EnterView();
+							break;
+						case 2:
+							ManageInsert mi = new ManageInsert();	//입력
+						//	mi.EnterViewInsert();
+							break;
+						case 3:
+							ManageDelete md = new ManageDelete();	//삭제
+						//	md.EnterViewDelete();
+							break;
+						case 4:
+							ManageUpdate mu = new ManageUpdate();	//수정
+						//	mu.EnterViewUpdate();
+							
+							break;
+						case 5:
+							
+							break;
+						case 0:
+							num=-1;	
+							break;							
+						}// switch end
+					}// while end
+			}
 			
 			else {
 				n=100;	

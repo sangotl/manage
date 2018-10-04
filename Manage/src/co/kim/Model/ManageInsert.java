@@ -4,10 +4,12 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import co.kim.Dao.BuyManageDao;
+import co.kim.Dao.EnterViewDao;
 import co.kim.Dao.ItemInfoDao;
 import co.kim.Dao.SellManageDao;
 import co.kim.Dao.WareInfoDao;
 import co.kim.bean.BuyManageBean;
+import co.kim.bean.EnterViewBean;
 import co.kim.bean.ItemInfoBean;
 import co.kim.bean.SellManageBean;
 import co.kim.bean.WareInfoBean;
@@ -19,6 +21,7 @@ public class ManageInsert {
 	WareInfoBean wb = new WareInfoBean();
 	BuyManageBean bm = new BuyManageBean();
 	SellManageBean sm = new SellManageBean();
+	EnterViewBean ev = new EnterViewBean();
 	Scanner sc = new Scanner(System.in);
 
 	public void ItemInfoInsert() throws ClassNotFoundException, SQLException {  //  1. 품목정보테이블
@@ -93,4 +96,22 @@ public class ManageInsert {
 		sdbo.SellManageView();
 		sdbo.close();
 	}
+	public void EnterViewInsert() throws ClassNotFoundException, SQLException {  //  6. 입고화면테이블
+		EnterViewDao edbo = new EnterViewDao();
+		
+		System.out.println("상품코드를 입력하세요.");    
+		ev.setI_code(sc.nextLine());                    
+		System.out.println("수량을 입력하세요");
+		ev.setI_count(sc.nextInt());
+		System.out.println("단가를 입력하세요");
+		ev.setE_money(sc.nextInt());
+		
+		
+		
+		edbo.EnterViewInsert(sm);   //Bean 
+		edbo.EnterView();
+		edbo.close();
+	}
+	
+	
 }
