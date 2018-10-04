@@ -54,7 +54,7 @@ public class BuyManageDao {
 	
 	
 	
-	public int BuyManageInsert(BuyManageBean b) throws SQLException {  //
+	public int BuyManageInsert(BuyManageBean b) throws SQLException {  //123
 		sql = "insert into buy_m values(?,?,?,?,?)";
 		try {
 			psmt = conn.prepareStatement(sql);
