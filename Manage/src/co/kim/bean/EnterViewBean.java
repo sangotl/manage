@@ -1,6 +1,6 @@
 package co.kim.bean;
 
-public class EnterViewBean {		//6. 입고화면12121
+public class EnterViewBean {		//6. 입고화면121211
 	private String b_number;		//구매번호
 	private String l_number;		//라인번호
 	private String i_code;			//상품코드
